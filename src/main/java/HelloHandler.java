@@ -11,8 +11,8 @@ import java.io.PrintWriter;
  * Created by erica on 2017/7/8.
  */
 public class HelloHandler extends AbstractHandler {
-    final String greeting;
-    final String body;
+    private final String greeting;
+    private final String body;
 
     public HelloHandler()
     {
@@ -42,6 +42,9 @@ public class HelloHandler extends AbstractHandler {
         PrintWriter out = response.getWriter();
 
         out.println("<h1>" + greeting + "</h1>");
+        // for thread breakpoint condition
+        String debug = request.getParameter("debug");
+        out.println(debug);
         if (body != null)
         {
             out.println(body);
