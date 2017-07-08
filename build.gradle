@@ -1,0 +1,25 @@
+group 'com.erik'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'java-library-distribution'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    maven{url 'http://maven.aliyun.com/nexus/content/repositories/central'}
+}
+
+dependencies {
+    compile 'org.eclipse.jetty:jetty-servlet:9.4.6.v20170531'
+}
+
+jar {
+    exclude 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA', 'META-INF/*.MF'
+
+    manifest {
+        attributes 'Main-Class': 'TestJetty',
+                'Class-Path': configurations.runtime.files.collect { "lib/$it.name" }.join(' ')
+    }
+}
